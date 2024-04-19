@@ -13,9 +13,9 @@ function BookingList({bookings}) {
             >
                {/* <div>{booking.bookingId}</div> */}
                     <div>{booking.playground.playgroundName}</div>
-                    {/* <div>{booking.startTime}</div>
+                    <div>{booking.startTime}</div>
                     <div>{booking.endTime}</div>
-                    <div>{booking.status}</div> */}
+                    <div>{booking.status}</div>
               {console.log(booking)}
             </div>
           );

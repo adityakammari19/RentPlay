@@ -36,7 +36,7 @@ function UserHome() {
 
     retriveAllBookingsByUsernameApi(username)
       .then((response) => {
-        setPlaygrounds(response.data);
+        setBookings(response.data);
       })
       .catch((error) => console.log(error))
       .finally(() => {
