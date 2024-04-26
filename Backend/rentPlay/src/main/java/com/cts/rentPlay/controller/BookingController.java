@@ -29,7 +29,7 @@ public class BookingController {
 	}
 	
 	@GetMapping("/user/{username}/playground/{playgroundId}")
-	public List<Booking> getBookingsByUsernameandPlaygroundId(@PathVariable String username,long playgroundId){
+	public List<Booking> getBookingsByUsernameandPlaygroundId(@PathVariable String username, Long playgroundId){
 		return bookingService.getBookingsByUsernameAndPlaygroundId(username,playgroundId);
 	}
 	
@@ -39,7 +39,7 @@ public class BookingController {
 	}
 	
 	@GetMapping("/owner/{username}/playground/{playgroundId}")
-	public List<Booking> getBookingsByOwnerUsernameandPlaygroundId(@PathVariable String username,long playgroundId){
+	public List<Booking> getBookingsByOwnerUsernameandPlaygroundId(@PathVariable String username,Long playgroundId){
 		return bookingService.getBookingsByOwnerUsernameAndPlaygroundId(username, playgroundId);
 	}
 	

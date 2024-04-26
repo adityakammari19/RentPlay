@@ -44,18 +44,18 @@ public class BookingServiceImpl implements BookingService {
 	@Override
 	public List<Booking> getBookingsByUsernameAndPlaygroundId(String username, Long playgroundId) {
 		Long userId = userService.getUserByUsername(username).getUserId();	
-		return bookingRepository.findByUserAndPlayground(userId, playgroundId);
+		return bookingRepository.findBookingsByUserIdAndPlaygroundId(userId, playgroundId);
 	}
 
 	@Override
 	public List<Booking> getBookingsByOwnerUsername(String Username) {
-		long ownerId = ownerService.getOwnerByUsername(Username).getOwnerId();
+		Long ownerId = ownerService.getOwnerByUsername(Username).getOwnerId();
 		return bookingRepository.findBookingsByOwnerId(ownerId);
 	}
 
 	@Override
 	public List<Booking> getBookingsByOwnerUsernameAndPlaygroundId( String username, Long playgroundId) {
-		long ownerId = ownerService.getOwnerByUsername(username).getOwnerId();
+		Long ownerId = ownerService.getOwnerByUsername(username).getOwnerId();
 		return bookingRepository.findBookingsByPlaygroundIdAndOwnerId(playgroundId, ownerId);
 	}
 
@@ -65,7 +65,7 @@ public class BookingServiceImpl implements BookingService {
 		Optional<Booking> optionalBooking = bookingRepository.findById(bookingId);
 		if (optionalBooking.isPresent()) {
 			Booking booking = optionalBooking.get();
-			booking.setStatus("confirmed");
+			booking.setStatus("Confirmed");
 			bookingRepository.save(booking);
 			return booking;
 		}
@@ -79,7 +79,7 @@ public class BookingServiceImpl implements BookingService {
 		Optional<Booking> optionalBooking = bookingRepository.findById(bookingId);
 		if (optionalBooking.isPresent()) {
 			Booking booking = optionalBooking.get();
-			booking.setStatus("rejected");
+			booking.setStatus("Rejected");
 			bookingRepository.save(booking);
 			return booking;
 		}

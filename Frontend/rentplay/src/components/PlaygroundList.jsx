@@ -1,4 +1,5 @@
 import React from 'react'
+import PlaygroundCard from './PlaygroundCard';
 
 function PlaygroundList({playgrounds}) {
     return (<>
@@ -11,7 +12,8 @@ function PlaygroundList({playgrounds}) {
               style={{ justifyContent: "space-between" }}
               key={playground.playgroundId}
             >
-              <div>{playground.playgroundName}</div>
+              {/* <div>{playground.playgroundName}</div> */}
+              <PlaygroundCard playground={playground} />
               {console.log(playground)}
             </div>
           );

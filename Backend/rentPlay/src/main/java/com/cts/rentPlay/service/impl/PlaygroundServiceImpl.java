@@ -48,7 +48,7 @@ public class PlaygroundServiceImpl implements PlaygroundService {
 
 	@Override
 	public List<Playground> getPlaygroundsByOwnerUsername(String username) {
-		long ownerId = ownerService.getOwnerByUsername(username).getOwnerId();
+		Long ownerId = ownerService.getOwnerByUsername(username).getOwnerId();
 		return playgroundRepository.findPlaygroundByOwnerId(ownerId);
 	}
 
