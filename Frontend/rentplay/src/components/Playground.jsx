@@ -85,6 +85,7 @@ const Playground = () => {
                   {/* Display Booking History */}
                   {/* You can customize the display of each booking */}
                   {booking.startTime} - {booking.endTime}
+                  {booking.status}
                 </li>
               );
             })}

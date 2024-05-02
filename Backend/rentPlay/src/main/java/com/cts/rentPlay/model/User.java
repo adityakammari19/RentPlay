@@ -1,13 +1,26 @@
 package com.cts.rentPlay.model;
 
+import java.util.HashSet;
+import java.util.Set;
+
 import org.springframework.stereotype.Component;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.JoinTable;
+import jakarta.persistence.ManyToMany;
 import jakarta.persistence.Table;
+import jakarta.validation.constraints.Email;
+import jakarta.validation.constraints.NotEmpty;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Pattern;
+import jakarta.validation.constraints.Size;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.Getter;
@@ -27,24 +40,43 @@ import lombok.ToString;
 public class User {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = "user_id")  
 	private Long userId;
 	
-	@Column(nullable = false)
+	@NotEmpty(message = "firstName Must not be empty")
+    @Column(name = "first_name") 
 	private String firstName;
 	
-	@Column(nullable = false)
+	@Column(name = "last_name") 
 	private String lastName;
 	
-	@Column(nullable = false)
+	@NotNull
+    @Size(min = 3, max = 20 ,message ="Username should have to be atleast 3 and atmost 20 characters")
+    @Column(name = "username", unique = true)  
 	private String username;
 	
-	@Column(nullable = false)
+	@Email(message = "Must be a well-formed email address")
+    @Column(name = "email", unique = true) 
 	private String email;
 	
-	@Column(nullable = false)
+	@Size(min=5, message="Password should contain atleast 5 characters")
+    @Column(name = "password") 
 	private String password;
 	
-	@Column(nullable = false)
+	 @Pattern(regexp = "^\\d{10}$",message = "invalid mobile number entered ")
+	 @Column(name = "phone_number") 
 	private String phoneNumber;
+	
+	@Column(name = "is_enabled")  
+    private boolean isEnabled; 
+
+	
+	 @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+	    @JoinTable(
+	            name = "users_roles",
+	            joinColumns = @JoinColumn(name = "user_id"),
+	            inverseJoinColumns = @JoinColumn(name = "role_id")
+	            )
+	    private Set<Role> roles = new HashSet<>();
 
 }

@@ -38,13 +38,14 @@ public class BookingServiceImpl implements BookingService {
 
 	@Override
 	public List<Booking> getBookingsByUser(String username) {
-		return bookingRepository.findByUserUsername(username);
+		Long userId = userService.getUserByUsername(username).getUserId();
+		return bookingRepository.findByUserId(userId);
 	}
 
 	@Override
 	public List<Booking> getBookingsByUsernameAndPlaygroundId(String username, Long playgroundId) {
 		Long userId = userService.getUserByUsername(username).getUserId();	
-		return bookingRepository.findBookingsByUserIdAndPlaygroundId(userId, playgroundId);
+		return bookingRepository.findByUserIdAndPlaygroundId(userId, playgroundId);
 	}
 
 	@Override
@@ -56,7 +57,7 @@ public class BookingServiceImpl implements BookingService {
 	@Override
 	public List<Booking> getBookingsByOwnerUsernameAndPlaygroundId( String username, Long playgroundId) {
 		Long ownerId = ownerService.getOwnerByUsername(username).getOwnerId();
-		return bookingRepository.findBookingsByPlaygroundIdAndOwnerId(playgroundId, ownerId);
+		return bookingRepository.findBookingsByPlaygroundIdAndOwnerId(ownerId, playgroundId);
 	}
 
 	@Override
@@ -113,8 +114,8 @@ public class BookingServiceImpl implements BookingService {
 		Long slotsBooked = bookingDto.getSlotsBooked();
 		Double totalPrice = slotsBooked * playground.getPricePerSlot();
 		Booking booking = new Booking();
-		booking.setPlayground(playground);
-		booking.setUser(user);
+		booking.setPlaygroundId(bookingDto.getPlaygroundId());
+		booking.setUserId(user.getUserId());
 		booking.setStatus("Pending");
 		booking.setStartTime(bookingDto.getStartTime());
 		booking.setEndTime(bookingDto.getEndTime());

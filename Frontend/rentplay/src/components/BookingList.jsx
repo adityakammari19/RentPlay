@@ -12,7 +12,7 @@ function BookingList({bookings}) {
               key={booking.bookingId}
             >
                {/* <div>{booking.bookingId}</div> */}
-                    <div>{booking.playground.playgroundName}</div>
+                    <div>{booking.playgroundId}</div>
                     <div>{booking.startTime}</div>
                     <div>{booking.endTime}</div>
                     <div>{booking.status}</div>

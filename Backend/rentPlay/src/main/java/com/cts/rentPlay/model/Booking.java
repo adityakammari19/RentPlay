@@ -11,8 +11,6 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -34,14 +32,18 @@ public class Booking {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long bookingId;
 	
-//	@ManyToOne(fetch = FetchType.EAGER,cascade=CascadeType.ALL, optional = true)
-	@JoinColumn(name = "playground_id",nullable = false)
-	@ManyToOne
-	private Playground playground;
+////	@ManyToOne(fetch = FetchType.EAGER,cascade=CascadeType.ALL, optional = true)
+//	@JoinColumn(name = "playground_id",nullable = false)
+//	private Playground playground;
 	
-	@ManyToOne
-	@JoinColumn(name = "user_id",nullable = false)
-	private User user;
+//	@ManyToOne
+	private Long playgroundId;
+	
+//	@ManyToOne
+//	@JoinColumn(name = "user_id",nullable = false)
+//	private User user;
+	
+	private Long userId;
 	
 	@Column(nullable = false)
 	@JsonFormat(shape=JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd'T'HH:mm:ss")
